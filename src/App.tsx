@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Clock, Mail, RefreshCw, Server, ShieldCheck } from 'lucide-react';
+import { Clock, Mail, MessageCircle, RefreshCw, Server, ShieldCheck } from 'lucide-react';
 import { useState } from 'react';
 
 export default function App() {
@@ -82,7 +82,7 @@ export default function App() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-12"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-6"
           >
             <div className="bg-slate-800/30 rounded-2xl p-5 border border-slate-700/30 flex flex-col items-center justify-center gap-3 transition-colors hover:bg-slate-800/50">
               <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mb-1">
@@ -96,11 +96,32 @@ export default function App() {
               </div>
               <span className="text-slate-300 text-sm font-medium">预计恢复：稍后</span>
             </div>
-            <div className="bg-slate-800/30 rounded-2xl p-5 border border-slate-700/30 flex flex-col items-center justify-center gap-3 transition-colors hover:bg-slate-800/50">
-              <div className="w-10 h-10 rounded-full bg-indigo-500/10 flex items-center justify-center mb-1">
+          </motion.div>
+
+          {/* Contact Info */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 0.6 }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12"
+          >
+            <div className="bg-slate-800/30 rounded-2xl p-4 border border-slate-700/30 flex items-center gap-4 transition-colors hover:bg-slate-800/50">
+              <div className="w-10 h-10 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0">
                 <Mail className="w-5 h-5 text-indigo-400" />
               </div>
-              <span className="text-slate-300 text-sm font-medium">联系我们</span>
+              <div className="flex flex-col items-start text-left">
+                <span className="text-slate-400 text-xs mb-0.5">联系邮箱</span>
+                <a href="mailto:aiyuechuang@gmail.com" className="text-slate-200 text-sm font-medium hover:text-indigo-400 transition-colors">aiyuechuang@gmail.com</a>
+              </div>
+            </div>
+            <div className="bg-slate-800/30 rounded-2xl p-4 border border-slate-700/30 flex items-center gap-4 transition-colors hover:bg-slate-800/50">
+              <div className="w-10 h-10 rounded-full bg-[#07C160]/10 flex items-center justify-center shrink-0">
+                <MessageCircle className="w-5 h-5 text-[#07C160]" />
+              </div>
+              <div className="flex flex-col items-start text-left">
+                <span className="text-slate-400 text-xs mb-0.5">微信联系</span>
+                <span className="text-slate-200 text-sm font-medium select-all">Jiabcdefh</span>
+              </div>
             </div>
           </motion.div>
 
