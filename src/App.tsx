@@ -1,9 +1,10 @@
 import { motion } from 'motion/react';
-import { Clock, Mail, MessageCircle, RefreshCw, Server, ShieldCheck } from 'lucide-react';
+import { Mail, MessageCircle, RefreshCw, Sparkles, Copy, CheckCircle2, Activity, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 
 export default function App() {
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const handleRefresh = () => {
     setIsRefreshing(true);
@@ -12,135 +13,193 @@ export default function App() {
     }, 800);
   };
 
-  return (
-    <div className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans text-slate-200">
-      {/* Background Ambient Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] md:w-[800px] md:h-[800px] bg-indigo-600/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[100vw] h-[100vw] md:w-[500px] md:h-[500px] bg-emerald-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] md:w-[600px] md:h-[600px] bg-blue-600/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
+  const handleCopy = () => {
+    navigator.clipboard.writeText('Jiabcdefh');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0ibm9uZSIvPgo8Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIi8+Cjwvc3ZnPg==')] pointer-events-none opacity-50" />
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#09090b] text-zinc-200 font-sans selection:bg-violet-500/30 relative flex items-center justify-center p-4 sm:p-6 md:p-12">
+      
+      {/* Premium Noise Texture Overlay */}
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay z-0" 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      </div>
+
+      {/* Subtle Background Gradients */}
+      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-violet-600/10 blur-[120px] pointer-events-none" />
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-fuchsia-600/10 blur-[120px] pointer-events-none" />
 
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 max-w-3xl w-full"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 relative z-10"
       >
-        {/* Main Card */}
-        <div className="bg-slate-900/40 backdrop-blur-2xl border border-slate-800/60 rounded-[2rem] p-6 sm:p-8 md:p-14 shadow-2xl text-center overflow-hidden relative">
+        {/* Left Column: Main Content & Contacts */}
+        <div className="lg:col-span-2 flex flex-col gap-4 md:gap-6">
           
-          {/* Top decorative line */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
-
-          {/* Animated Icon Container */}
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-24 h-24 mx-auto mb-10"
-          >
-            <div className="absolute inset-0 bg-indigo-500/20 rounded-3xl rotate-6" />
-            <div className="absolute inset-0 bg-blue-500/20 rounded-3xl -rotate-6" />
-            <div className="relative w-full h-full bg-slate-900 border border-slate-700/50 rounded-2xl flex items-center justify-center shadow-inner">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <Server className="w-10 h-10 text-indigo-400" />
-              </motion.div>
-            </div>
+          {/* Main Hero Card */}
+          <motion.div variants={itemVariants} className="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-8 md:p-12 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-fuchsia-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
-            {/* Pulsing dot */}
-            <div className="absolute -top-1 -right-1 w-4 h-4">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-slate-900"></span>
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-800/80 border border-zinc-700/50 text-xs font-medium text-zinc-300 mb-8">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                系统维护中
+              </div>
+
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
+                我们正在升级 <br className="hidden sm:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
+                  bornforthis.cn
+                </span>
+              </h1>
+
+              <p className="text-zinc-400 text-lg md:text-xl leading-relaxed max-w-2xl">
+                为了给您提供更卓越的体验、更快的访问速度以及更安全的数据保护，我们正在进行一次全面的系统升级。网站暂时无法访问，感谢您的耐心等待。
+              </p>
             </div>
+
+            {/* Decorative abstract shapes inside hero */}
+            <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-gradient-to-br from-violet-500/10 to-transparent rounded-full blur-3xl" />
           </motion.div>
 
-          <motion.h1 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 tracking-tight"
-          >
-            系统升级维护中
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-base sm:text-lg text-slate-400 mb-8 sm:mb-12 leading-relaxed max-w-xl mx-auto"
-          >
-            为了给您提供更优质的服务和更安全的环境，我们正在对 <span className="text-indigo-400 font-semibold px-1">bornforthis.cn</span> 进行全面升级。期间网站将暂时无法访问，给您带来的不便敬请谅解。
-          </motion.p>
+          {/* Contacts Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            {/* Email Card */}
+            <motion.div variants={itemVariants} className="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group hover:border-violet-500/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity duration-500 transform group-hover:scale-110 group-hover:-rotate-12">
+                <Mail className="w-24 h-24 text-violet-400" />
+              </div>
+              
+              <div className="relative z-10 mb-8">
+                <div className="w-12 h-12 rounded-2xl bg-violet-500/10 flex items-center justify-center mb-4 border border-violet-500/20">
+                  <Mail className="w-6 h-6 text-violet-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-1">邮件联系</h3>
+                <p className="text-sm text-zinc-400">随时发送邮件给我们</p>
+              </div>
 
-          {/* Status Indicators */}
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-6"
-          >
-            <div className="bg-slate-800/30 rounded-2xl p-5 border border-slate-700/30 flex flex-col items-center justify-center gap-3 transition-colors hover:bg-slate-800/50">
-              <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mb-1">
-                <ShieldCheck className="w-5 h-5 text-emerald-400" />
-              </div>
-              <span className="text-slate-300 text-sm font-medium">数据安全保障</span>
-            </div>
-            <div className="bg-slate-800/30 rounded-2xl p-5 border border-slate-700/30 flex flex-col items-center justify-center gap-3 transition-colors hover:bg-slate-800/50">
-              <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mb-1">
-                <Clock className="w-5 h-5 text-blue-400" />
-              </div>
-              <span className="text-slate-300 text-sm font-medium">预计恢复：稍后</span>
-            </div>
-          </motion.div>
+              <a href="mailto:aiyuechuang@gmail.com" className="relative z-10 inline-flex items-center justify-between w-full p-4 rounded-xl bg-zinc-950/50 border border-zinc-800/50 hover:bg-zinc-800 transition-colors group/btn">
+                <span className="text-zinc-200 font-medium truncate mr-2">aiyuechuang@gmail.com</span>
+                <ArrowRight className="w-4 h-4 text-zinc-500 group-hover/btn:text-violet-400 group-hover/btn:translate-x-1 transition-all" />
+              </a>
+            </motion.div>
 
-          {/* Contact Info */}
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.6 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12"
-          >
-            <div className="bg-slate-800/30 rounded-2xl p-4 border border-slate-700/30 flex items-center gap-4 transition-colors hover:bg-slate-800/50">
-              <div className="w-10 h-10 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0">
-                <Mail className="w-5 h-5 text-indigo-400" />
+            {/* WeChat Card */}
+            <motion.div variants={itemVariants} className="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group hover:border-[#07C160]/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity duration-500 transform group-hover:scale-110 group-hover:rotate-12">
+                <MessageCircle className="w-24 h-24 text-[#07C160]" />
               </div>
-              <div className="flex flex-col items-start text-left min-w-0">
-                <span className="text-slate-400 text-xs mb-0.5">联系邮箱</span>
-                <a href="mailto:aiyuechuang@gmail.com" className="text-slate-200 text-sm font-medium hover:text-indigo-400 transition-colors truncate w-full">aiyuechuang@gmail.com</a>
+              
+              <div className="relative z-10 mb-8">
+                <div className="w-12 h-12 rounded-2xl bg-[#07C160]/10 flex items-center justify-center mb-4 border border-[#07C160]/20">
+                  <MessageCircle className="w-6 h-6 text-[#07C160]" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-1">微信沟通</h3>
+                <p className="text-sm text-zinc-400">添加微信获取实时进度</p>
               </div>
-            </div>
-            <div className="bg-slate-800/30 rounded-2xl p-4 border border-slate-700/30 flex items-center gap-4 transition-colors hover:bg-slate-800/50">
-              <div className="w-10 h-10 rounded-full bg-[#07C160]/10 flex items-center justify-center shrink-0">
-                <MessageCircle className="w-5 h-5 text-[#07C160]" />
-              </div>
-              <div className="flex flex-col items-start text-left min-w-0">
-                <span className="text-slate-400 text-xs mb-0.5">微信联系</span>
-                <span className="text-slate-200 text-sm font-medium select-all truncate w-full">Jiabcdefh</span>
-              </div>
-            </div>
-          </motion.div>
 
-          {/* Action Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-          >
+              <button onClick={handleCopy} className="relative z-10 inline-flex items-center justify-between w-full p-4 rounded-xl bg-zinc-950/50 border border-zinc-800/50 hover:bg-zinc-800 transition-colors group/btn cursor-pointer">
+                <span className="text-zinc-200 font-medium truncate mr-2">Jiabcdefh</span>
+                {copied ? (
+                  <CheckCircle2 className="w-4 h-4 text-[#07C160]" />
+                ) : (
+                  <Copy className="w-4 h-4 text-zinc-500 group-hover/btn:text-[#07C160] transition-colors" />
+                )}
+              </button>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Right Column: Status & Animation */}
+        <motion.div variants={itemVariants} className="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-8 md:p-10 flex flex-col relative overflow-hidden">
+          <div className="flex items-center justify-between mb-12">
+            <h3 className="text-lg font-medium text-white flex items-center gap-2">
+              <Activity className="w-5 h-5 text-fuchsia-400" />
+              实时状态
+            </h3>
+            <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">Status</span>
+          </div>
+
+          {/* Abstract Animation Area */}
+          <div className="flex-1 flex items-center justify-center min-h-[200px] lg:min-h-0 relative mb-12">
+            <div className="relative w-40 h-40 flex items-center justify-center">
+              {/* Outer spinning dashed ring */}
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 rounded-full border-[2px] border-dashed border-zinc-700/50"
+              />
+              {/* Inner spinning ring */}
+              <motion.div 
+                animate={{ rotate: -360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-4 rounded-full border border-violet-500/30 border-t-violet-500"
+              />
+              {/* Center glowing orb */}
+              <motion.div 
+                animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="w-16 h-16 rounded-full bg-gradient-to-tr from-violet-500 to-fuchsia-500 blur-md"
+              />
+              <div className="absolute w-16 h-16 rounded-full bg-gradient-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center shadow-[0_0_30px_rgba(139,92,246,0.5)]">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-auto space-y-6">
+            <div className="space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-zinc-400">升级进度</span>
+                <span className="text-violet-400 font-medium">进行中</span>
+              </div>
+              <div className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: "0%" }}
+                  animate={{ width: "65%" }}
+                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+                  className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full relative"
+                >
+                  <div className="absolute top-0 right-0 bottom-0 w-10 bg-gradient-to-r from-transparent to-white/30 animate-[shimmer_2s_infinite]" />
+                </motion.div>
+              </div>
+            </div>
+
             <button 
               onClick={handleRefresh}
               disabled={isRefreshing}
-              className="group relative px-8 py-3.5 bg-white text-slate-900 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center gap-2 mx-auto disabled:opacity-70 disabled:hover:scale-100 cursor-pointer"
+              className="w-full py-4 bg-zinc-100 hover:bg-white text-zinc-900 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer group"
             >
               <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : 'group-hover:rotate-180 transition-transform duration-500'}`} />
               {isRefreshing ? '正在刷新...' : '刷新页面'}
             </button>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
+
       </motion.div>
       
       {/* Footer */}
@@ -148,12 +207,17 @@ export default function App() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-8 text-slate-500 text-sm flex items-center gap-2"
+        className="absolute bottom-6 text-zinc-600 text-sm font-medium"
       >
-        <span>&copy; {new Date().getFullYear()} bornforthis.cn</span>
-        <span className="w-1 h-1 rounded-full bg-slate-600"></span>
-        <span>All rights reserved.</span>
+        &copy; {new Date().getFullYear()} bornforthis.cn
       </motion.div>
+
+      <style>{`
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(200%); }
+        }
+      `}</style>
     </div>
   );
 }
