@@ -90,6 +90,7 @@ export default function App() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             {/* Email Card */}
             <motion.div variants={itemVariants} className="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/60 rounded-[2rem] p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group hover:border-violet-500/30 transition-colors duration-500">
+              <a href="mailto:aiyuechuang@gmail.com" className="absolute inset-0 z-20" aria-label="Send email to aiyuechuang@gmail.com"></a>
               <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity duration-500 transform group-hover:scale-110 group-hover:-rotate-12">
                 <Mail className="w-24 h-24 text-violet-400" />
               </div>
@@ -102,10 +103,10 @@ export default function App() {
                 <p className="text-sm text-zinc-400">随时发送邮件给我们</p>
               </div>
 
-              <a href="mailto:aiyuechuang@gmail.com" className="relative z-10 inline-flex items-center justify-between w-full p-4 rounded-xl bg-zinc-950/50 border border-zinc-800/50 hover:bg-zinc-800 transition-colors group/btn">
+              <div className="relative z-10 inline-flex items-center justify-between w-full p-4 rounded-xl bg-zinc-950/50 border border-zinc-800/50 group-hover:bg-zinc-800 transition-colors group/btn">
                 <span className="text-zinc-200 font-medium truncate mr-2">aiyuechuang@gmail.com</span>
-                <ArrowRight className="w-4 h-4 text-zinc-500 group-hover/btn:text-violet-400 group-hover/btn:translate-x-1 transition-all" />
-              </a>
+                <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-violet-400 group-hover:translate-x-1 transition-all" />
+              </div>
             </motion.div>
 
             {/* WeChat Card */}
