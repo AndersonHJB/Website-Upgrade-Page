@@ -15,9 +15,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans text-slate-200">
       {/* Background Ambient Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] md:w-[800px] md:h-[800px] bg-indigo-600/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[100vw] h-[100vw] md:w-[500px] md:h-[500px] bg-emerald-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] md:w-[600px] md:h-[600px] bg-blue-600/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
 
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0ibm9uZSIvPgo8Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIi8+Cjwvc3ZnPg==')] pointer-events-none opacity-50" />
@@ -29,7 +29,7 @@ export default function App() {
         className="relative z-10 max-w-3xl w-full"
       >
         {/* Main Card */}
-        <div className="bg-slate-900/40 backdrop-blur-2xl border border-slate-800/60 rounded-[2rem] p-8 md:p-14 shadow-2xl text-center overflow-hidden relative">
+        <div className="bg-slate-900/40 backdrop-blur-2xl border border-slate-800/60 rounded-[2rem] p-6 sm:p-8 md:p-14 shadow-2xl text-center overflow-hidden relative">
           
           {/* Top decorative line */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
@@ -63,7 +63,7 @@ export default function App() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 tracking-tight"
           >
             系统升级维护中
           </motion.h1>
@@ -72,7 +72,7 @@ export default function App() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-lg text-slate-400 mb-12 leading-relaxed max-w-xl mx-auto"
+            className="text-base sm:text-lg text-slate-400 mb-8 sm:mb-12 leading-relaxed max-w-xl mx-auto"
           >
             为了给您提供更优质的服务和更安全的环境，我们正在对 <span className="text-indigo-400 font-semibold px-1">bornforthis.cn</span> 进行全面升级。期间网站将暂时无法访问，给您带来的不便敬请谅解。
           </motion.p>
@@ -109,18 +109,18 @@ export default function App() {
               <div className="w-10 h-10 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0">
                 <Mail className="w-5 h-5 text-indigo-400" />
               </div>
-              <div className="flex flex-col items-start text-left">
+              <div className="flex flex-col items-start text-left min-w-0">
                 <span className="text-slate-400 text-xs mb-0.5">联系邮箱</span>
-                <a href="mailto:aiyuechuang@gmail.com" className="text-slate-200 text-sm font-medium hover:text-indigo-400 transition-colors">aiyuechuang@gmail.com</a>
+                <a href="mailto:aiyuechuang@gmail.com" className="text-slate-200 text-sm font-medium hover:text-indigo-400 transition-colors truncate w-full">aiyuechuang@gmail.com</a>
               </div>
             </div>
             <div className="bg-slate-800/30 rounded-2xl p-4 border border-slate-700/30 flex items-center gap-4 transition-colors hover:bg-slate-800/50">
               <div className="w-10 h-10 rounded-full bg-[#07C160]/10 flex items-center justify-center shrink-0">
                 <MessageCircle className="w-5 h-5 text-[#07C160]" />
               </div>
-              <div className="flex flex-col items-start text-left">
+              <div className="flex flex-col items-start text-left min-w-0">
                 <span className="text-slate-400 text-xs mb-0.5">微信联系</span>
-                <span className="text-slate-200 text-sm font-medium select-all">Jiabcdefh</span>
+                <span className="text-slate-200 text-sm font-medium select-all truncate w-full">Jiabcdefh</span>
               </div>
             </div>
           </motion.div>
