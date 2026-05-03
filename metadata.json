@@ -1,5 +1,6 @@
 {
-  "name": "Website Upgrade Page",
+  "name": "升级页面",
   "description": "A temporary maintenance page for bornforthis.cn during website upgrades.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }

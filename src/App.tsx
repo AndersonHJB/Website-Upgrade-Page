@@ -1,13 +1,64 @@
 import { motion } from 'motion/react';
 import { Mail, MessageCircle, RefreshCw, Sparkles, Copy, CheckCircle2, Activity, ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function App() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [copied, setCopied] = useState(false);
+  
+  const [progress, setProgress] = useState(0);
+  const [stage, setStage] = useState('准备中...');
+  const [timeRemaining, setTimeRemaining] = useState(60);
+
+  const TOTAL_TIME = 3600; // 60 minutes in seconds
+
+  useEffect(() => {
+    let start = localStorage.getItem('upgrade_start_time');
+    if (!start) {
+      start = Date.now().toString();
+      localStorage.setItem('upgrade_start_time', start);
+    }
+
+    const timer = setInterval(() => {
+      const elapsed = (Date.now() - parseInt(start || '0')) / 1000;
+      
+      if (elapsed >= TOTAL_TIME) {
+        setProgress(100);
+        setStage('升级成功');
+        setTimeRemaining(0);
+        clearInterval(timer);
+        return;
+      }
+
+      let currentProgress = 0;
+      let currentStage = '';
+
+      // 阶段：build(25m=1500s), 打包(2m=120s), 推送(30m=1800s), 解压(3m=180s)
+      if (elapsed < 1500) {
+        currentStage = '正在 Build...';
+        currentProgress = (elapsed / 1500) * 40; // 0-40%
+      } else if (elapsed < 1620) {
+        currentStage = '正在打包...';
+        currentProgress = 40 + ((elapsed - 1500) / 120) * 5; // 40-45%
+      } else if (elapsed < 3420) {
+        currentStage = '正在推送...';
+        currentProgress = 45 + ((elapsed - 1620) / 1800) * 45; // 45-90%
+      } else {
+        currentStage = '正在解压...';
+        currentProgress = 90 + ((elapsed - 3420) / 180) * 9.9; // 90-99.9%
+      }
+
+      setProgress(currentProgress);
+      setStage(currentStage);
+      setTimeRemaining(Math.ceil((TOTAL_TIME - elapsed) / 60));
+    }, 100);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const handleRefresh = () => {
     setIsRefreshing(true);
+    localStorage.removeItem('upgrade_start_time'); // Reset timer on refresh for demo purposes
     setTimeout(() => {
       window.location.reload();
     }, 800);
@@ -174,15 +225,19 @@ export default function App() {
 
           <div className="mt-auto space-y-6">
             <div className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-zinc-400">升级进度</span>
-                <span className="text-violet-400 font-medium">进行中</span>
+              <div className="flex justify-between text-sm items-end">
+                <div className="flex flex-col gap-1">
+                  <span className="text-zinc-300 font-medium">{stage}</span>
+                  {timeRemaining > 0 && (
+                    <span className="text-xs text-zinc-500">预计剩余 {timeRemaining} 分钟</span>
+                  )}
+                </div>
+                <span className="text-violet-400 font-medium tabular-nums">{progress.toFixed(2)}%</span>
               </div>
               <div className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
                 <motion.div 
-                  initial={{ width: "0%" }}
-                  animate={{ width: "65%" }}
-                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ duration: 0.1, ease: "linear" }}
                   className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full relative"
                 >
                   <div className="absolute top-0 right-0 bottom-0 w-10 bg-gradient-to-r from-transparent to-white/30 animate-[shimmer_2s_infinite]" />
